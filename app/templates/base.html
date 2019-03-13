@@ -1,0 +1,27 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - da Pirate's Boat</title>
+        {% else %}
+        <title>Welcome to da Boat!</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            da Boat: 
+            <a href="/index">Wharf</a>
+            <a href="/login">Login</a>
+            <a href="/search">Search</a>
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>

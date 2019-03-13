@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Let's find what are you looking for!</h1>
+   <form action="" method="post" novalidate>
+        <p>
+            {{form.select()}}
+        </p>
+        <p>
+            {{ form.search.label }}<br>
+            {{ form.search(size=32) }}
+            {% for error in form.search.errors %}
+            <span style="color:red">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+{% endblock %}

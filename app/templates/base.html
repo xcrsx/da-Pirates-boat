@@ -1,5 +1,9 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1. shrink-to-fit=yes">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         {% if title %}
         <title>{{ title }} - da Pirate's Boat</title>
         {% else %}
@@ -7,11 +11,14 @@
         {% endif %}
     </head>
     <body>
-        <div>
-            da Boat: 
-            <a href="/index">Wharf</a>
-            <a href="/login">Login</a>
-            <a href="/search">Search</a>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <h5 class="my-0 mr-md-auto font-weight-normal"><a href="/index">da Boat</a></h5>
+            <nav class="my-2 my-md-0 mr-md-3">
+                    <a class="p-2 text-dark" href="/index">Wharf</a>
+                    <a class="p-2 text-dark" href="/profile">My profile</a>
+                    <a class="p-2 text-dark" href="/login">Sign up</a>
+                    <a class="p-2 text-dark" href="/search">Search</a>
+            </nav>
         </div>
         <hr>
         {% with messages = get_flashed_messages() %}
@@ -23,5 +30,7 @@
         </ul>
         {% endif %}
         {% endwith %}
+        {% block search %} {% endblock %}
         {% block content %}{% endblock %}
     </body>
+</html>

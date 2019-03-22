@@ -4,35 +4,36 @@
 <div class='container'>
     <div class="row">
         <div class="col-md-4">
-            <h2>Hello, {{ user.username }}!</h2>
+            <h2>Hello, {{ current_user.username }}!</h2>
             {% for post in posts %}
             <div><p>{{ post.author.name }} has released new album: <b>{{ post.album }}</b></p></div>
             {% endfor %}
         </div>
-        <div>
-            <div class="=col-md-4 col-md-push-4">
-                <h2>Sign In</h2>
-                <form action="" method="post" novalidate>
-                    {{ form.hidden_tag() }}
-                    <p>
-                        {{ form.username.label }}<br>
-                        {{ form.username(size=16) }}
-                        {% for error in form.username.errors %}
-                        <span style="color:red;">[{{ error }}]</span>
-                        {% endfor %}
-                    </p>
-                    <p>
-                        {{ form.password.label }}<br>
-                        {{ form.password(sixe=16) }}
-                        {% for error in form.password.errors %}
-                        <span style="color:red;">[{{ error }}]</span>
-                        {% endfor %}
-                    </p>
-                    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-                    <p>{{ form.submit() }}</p>
-                </form>
-            </div>
+        {% if current_user.is_anonymous %}
+        <div class="col-md-4 col-md-push-8">
+            <h2>Sign In</h2>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }}<br>
+                    {{ form.username(size=16) }}
+                    {% for error in form.username.errors %}
+                    <span style="color:red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password(sixe=16) }}
+                    {% for error in form.password.errors %}
+                    <span style="color:red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                <p>{{ form.submit() }}</p>
+                <p> New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+            </form>
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

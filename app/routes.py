@@ -30,7 +30,7 @@ def index():
                 flash('Invalid username or password')
                 return redirect(url_for('login'))
             login_user(user, remember=form.remember_me.data)
-            return redirect(url_for('user'))
+            return redirect(url_for('index'))
     return render_template('index.html', title='Wharf', posts=posts, form=form)
 
 
@@ -66,8 +66,6 @@ def search():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first()
-    if user is None:
-        return redirect(url_for('login'))
     artists = Favorite.query.filter_by(user_id=user.id).all()
     return render_template('profile.html', title='My profile', user=user,
                            artists=artists)

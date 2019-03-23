@@ -20,7 +20,11 @@
                     {% else %}
                     <a class="p-2 text-dark" href="{{ url_for('logout') }}">Logout</a>
                     {% endif %}
+                    {% if not current_user.is_anonymous %}
                     <a class="p-2 text-dark" href="{{ url_for('user', username=current_user.username) }}">My profile</a>
+                    {% else %}
+                    <a class="p-2 text-dark" href="{{ url_for('login') }}">My profile</a>
+                    {% endif %}
                     <a class="p-2 text-dark" href="{{ url_for('search') }}">Search</a>
             </nav>
         </div>

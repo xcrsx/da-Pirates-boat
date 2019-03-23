@@ -14,10 +14,18 @@
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
             <h5 class="my-0 mr-md-auto font-weight-normal"><a href="/index">da Boat</a></h5>
             <nav class="my-2 my-md-0 mr-md-3">
-                    <a class="p-2 text-dark" href="/index">Wharf</a>
-                    <a class="p-2 text-dark" href="/profile">My profile</a>
-                    <a class="p-2 text-dark" href="/login">Sign up</a>
-                    <a class="p-2 text-dark" href="/search">Search</a>
+                    <a class="p-2 text-dark" href="{{ url_for('index') }}">Wharf</a>
+                    {% if current_user.is_anonymous %}
+                    <a class="p-2 text-dark" href="{{ url_for('login') }}">Sign up</a>
+                    {% else %}
+                    <a class="p-2 text-dark" href="{{ url_for('logout') }}">Logout</a>
+                    {% endif %}
+                    {% if not current_user.is_anonymous %}
+                    <a class="p-2 text-dark" href="{{ url_for('user', username=current_user.username) }}">My profile</a>
+                    {% else %}
+                    <a class="p-2 text-dark" href="{{ url_for('login') }}">My profile</a>
+                    {% endif %}
+                    <a class="p-2 text-dark" href="{{ url_for('search') }}">Search</a>
             </nav>
             
         </div>        

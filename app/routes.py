@@ -2,16 +2,19 @@ from app import db
 from app.forms import RegistrationForm
 from flask import render_template, flash, redirect, url_for, request
 from app import app
-from app.forms import LoginForm, MusicSearchForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Favorite
 from werkzeug.urls import url_parse
+from app.forms import LoginForm, MusicSearchForm, SearchResultForm
+from app.SC import SoundCloudParsing
+
 
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     user = current_user
+    sc_list = SoundCloudParsing.sc_result
     posts = [  # it will be the popular and new music
         {
             'author': {'name': 'John'},
@@ -31,7 +34,7 @@ def index():
                 return redirect(url_for('login'))
             login_user(user, remember=form.remember_me.data)
             return redirect(url_for('index'))
-    return render_template('index.html', title='Wharf', posts=posts, form=form)
+    return render_template('index.html', title='Wharf', posts=posts, form=form, sc_list=sc_list)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -56,10 +59,19 @@ def login():
 def search():
     form = MusicSearchForm()
     if form.validate_on_submit():
-        flash('Search requested for author {}'.format(
+        flash('Search requested for author: {}'.format(
            form.search.data))
-        return redirect(url_for('index'))
+        return redirect('/search_result')
     return render_template('search.html', title="Let's find smth", form=form)
+
+@app.route('/search_result', methods=['GET', 'POST'])
+def search_result():
+    form = SearchResultForm()
+    if form.validate_on_submit():
+        flash('New search requested: {}'.format(
+           form.search.data))
+        return redirect('/search_result')
+    return render_template('search_result.html', title="Let's find smth", form=form)
 
 
 @app.route('/user/<username>')

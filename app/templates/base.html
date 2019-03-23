@@ -27,17 +27,8 @@
                     {% endif %}
                     <a class="p-2 text-dark" href="{{ url_for('search') }}">Search</a>
             </nav>
-        </div>
-        <hr>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
+            
+        </div>        
         {% block search %} {% endblock %}
         {% block content %}{% endblock %}
     </body>

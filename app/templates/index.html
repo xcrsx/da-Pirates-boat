@@ -8,6 +8,14 @@
             {% for post in posts %}
             <div><p>{{ post.author.name }} has released new album: <b>{{ post.album }}</b></p></div>
             {% endfor %}
+            <h3>New in SoundCloud:</h3>
+            {% for info in sc_list %}
+            <h4>{{ info.title }}</h4>
+            <h5>Playlist name: {{ info.playlist }}</h5>
+            <img src="info.pic">
+            <hr />
+
+            {% endfor %}
         </div>
         {% if current_user.is_anonymous %}
         <div class="col-md-4 col-md-push-8">

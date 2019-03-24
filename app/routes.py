@@ -8,23 +8,11 @@ from werkzeug.urls import url_parse
 from app.forms import LoginForm, MusicSearchForm, SearchResultForm
 from app.SC import SoundCloudParsing
 
-
-
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     user = current_user
     sc_list = SoundCloudParsing.sc_result
-    posts = [  # it will be the popular and new music
-        {
-            'author': {'name': 'John'},
-            'album': 'Some title'
-        },
-        {
-            'author': {'name': 'Susan'},
-            'album': 'another title'
-        }
-    ]
     form = LoginForm()
     if not current_user.is_authenticated:
         if form.validate_on_submit():
@@ -34,13 +22,14 @@ def index():
                 return redirect(url_for('login'))
             login_user(user, remember=form.remember_me.data)
             return redirect(url_for('index'))
-    return render_template('index.html', title='Wharf', posts=posts, form=form, sc_list=sc_list)
+    return render_template('index.html', title='Wharf', form=form,
+                           sc_list=sc_list)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('user'))  # если юзер аутентифицирован - перенаправляем в профиль
+        return redirect(url_for('user'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -64,6 +53,7 @@ def search():
         return redirect('/search_result')
     return render_template('search.html', title="Let's find smth", form=form)
 
+
 @app.route('/search_result', methods=['GET', 'POST'])
 def search_result():
     form = SearchResultForm()
@@ -71,7 +61,8 @@ def search_result():
         flash('New search requested: {}'.format(
            form.search.data))
         return redirect('/search_result')
-    return render_template('search_result.html', title="Let's find smth", form=form)
+    return render_template('search_result.html', title="Let's find smth", 
+                           form=form)
 
 
 @app.route('/user/<username>')
@@ -102,3 +93,9 @@ def register():
         flash('Welcome to da Boat!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+
+@app.route('/player')
+def player():
+    title = SoundCloudParsing.sc_title
+    return render_template('player.html', title=title)

@@ -3,22 +3,31 @@
 {% block content %}
 <div class='container'>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-10">
+            <!--<style>
+                body {background: url(https://www.carbonbrief.org/wp-content/uploads/2015/02/stock-deep-ocean-1550x804.jpg);
+                      color: wheat;
+                      }
+            </style>-->
+            {% if current_user.is_anonymous %}
+            <h2>Hello, <a href="{{ url_for('register') }}">user!</a></h2>
+            {% else %}
             <h2>Hello, {{ current_user.username }}!</h2>
-            {% for post in posts %}
-            <div><p>{{ post.author.name }} has released new album: <b>{{ post.album }}</b></p></div>
-            {% endfor %}
-            <h3>New in SoundCloud:</h3>
-            {% for info in sc_list %}
-            <h4>{{ info.title }}</h4>
-            <h5>Playlist name: {{ info.playlist }}</h5>
-            <img src="info.pic">
-            <hr />
-
-            {% endfor %}
+            {% endif %}
+            <hr/>
+                <div class="row">
+                    <div class="col-8">
+                        <h3>New in SoundCloud:</h3><hr/>
+                        {% for info in sc_list %}
+                        <h4>{{ info.title }}</h4>
+                        <h5><a href="{{ url_for('player') }}"><img src="{{ (info.pic) }}">  {{ info.playlist }}</span></a></h5>
+                        <hr/>
+                        {% endfor %}
+                    </div>
+                </div>           
         </div>
         {% if current_user.is_anonymous %}
-        <div class="col-md-4 col-md-push-8">
+        <div class="col-md-2 col-md-push-8">
             <h2>Sign In</h2>
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
@@ -31,7 +40,7 @@
                 </p>
                 <p>
                     {{ form.password.label }}<br>
-                    {{ form.password(sixe=16) }}
+                    {{ form.password(size=16) }}
                     {% for error in form.password.errors %}
                     <span style="color:red;">[{{ error }}]</span>
                     {% endfor %}

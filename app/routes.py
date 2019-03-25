@@ -6,7 +6,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Favorite
 from werkzeug.urls import url_parse
 from app.forms import LoginForm, MusicSearchForm, SearchResultForm
-from app.SC import SoundCloudParsing
+from app.sc_parsing import SoundCloudParsing
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])

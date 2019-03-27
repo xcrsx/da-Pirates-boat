@@ -14,9 +14,13 @@
             {% else %}
             <h2>Hello, {{ current_user.username }}!</h2>
             {% endif %}
-            <hr/>
+            <hr/>                
                 <div class="row">
                     <div class="col-8">
+                            <h3>Daily in Bandcamp:</h3><hr/>
+                            {% for music in bc_list %}
+                            <iframe width="100%" height="100" style="position: relative; display: block; width: 100%; height: 120;" src="{{ music.url }}" allowtransparency="true" frameborder="0"></iframe><hr/>
+                            {% endfor %}
                         <h3>New in SoundCloud:</h3><hr/>
                         {% for info in sc_list %}
                         <h4>{{ info.genre }}</h4>
@@ -49,8 +53,10 @@
                         <h5><a href="{{ url_for('player') }}"><img src="{{ (info.artwork) }}"> </span></a></h5>-->
                         <hr/>
                         {% endfor %}
+                       
                     </div>
-                </div>           
+                </div>   
+                   
         </div>
         {% if current_user.is_anonymous %}
         <div class="col-md-2 col-md-push-8">
@@ -74,8 +80,8 @@
                 <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
                 <p>{{ form.submit() }}</p>
                 <p> New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
-            </form>
-        </div>
+            </form>            
+        </div>        
         {% endif %}
     </div>
 </div>

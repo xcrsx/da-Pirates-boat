@@ -17,9 +17,19 @@ def get_daily_music():
         daily_music = soup.find('div', id='content').findAll('iframe')
         result_music = []
         for music in daily_music:
-            url = music.get('src')
+            allowtransparency = music.get('allowtransparency')
+            frameborder = music.get('frameborder')
+            height = music.get('height')
+            src = music.get('src')
+            style = music.get('style')
+            width = music.get('width')
             result_music.append({
-                'url': url
-            })
+                'allowtransparency': allowtransparency,
+                'frameborder': frameborder,
+                'height': height,
+                'src': src,
+                'style': style,
+                'width': width
+                })
         return result_music
     return False

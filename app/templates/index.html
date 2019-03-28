@@ -19,7 +19,7 @@
                     <div class="col-8">
                             <h3>Daily in Bandcamp:</h3><hr/>
                             {% for music in bc_list %}
-                            <iframe width="100%" height="100" style="position: relative; display: block; width: 100%; height: 120;" src="{{ music.url }}" allowtransparency="true" frameborder="0"></iframe><hr/>
+                            <iframe allowtransparency="{{ music.allowtransparency }}" frameborder="{{ music.frameborder }}" height="{{ music.height }}}" src="{{ music.src }}" style="{{ music.style }}" width="{{ music.width }}"></iframe><hr/> 
                             {% endfor %}
                         <h3>New in SoundCloud:</h3><hr/>
                         {% for info in sc_list %}

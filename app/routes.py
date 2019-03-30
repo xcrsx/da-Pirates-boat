@@ -6,7 +6,8 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Favorite, Popular
 from werkzeug.urls import url_parse
 from app.forms import LoginForm, MusicSearchForm, SearchResultForm
-from app.SC import SoundCloudParsing
+from app.sc_parsing import SoundCloudParsing
+from app.bc_parsing import get_daily_music
 
 
 @app.route('/')
@@ -15,6 +16,7 @@ def index():
     user = current_user
     sc_list = SoundCloudParsing.sc_result
 #    popular_sc = Popular.query.limit(6).all()
+    bc_list = get_daily_music()
     form = LoginForm()
     if not current_user.is_authenticated:
         if form.validate_on_submit():
@@ -25,7 +27,7 @@ def index():
             login_user(user, remember=form.remember_me.data)
             return redirect(url_for('index'))
     return render_template('index.html', title='Wharf', form=form,
-                           sc_list=sc_list)
+                           sc_list=sc_list, bc_list=bc_list)
 
 
 @app.route('/login', methods=['GET', 'POST'])

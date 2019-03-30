@@ -2,6 +2,7 @@ from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import login
+from datetime import datetime
 
 
 class User(UserMixin, db.Model):
@@ -41,6 +42,7 @@ class Popular(db.Model):
     genre = db.Column(db.String, nullable=True)
     pic = db.Column(db.String, nullable=True)
     url = db.Column(db.String)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return '<New on SoundCloud {} {} {} {}'.format(self.title, self.genre, self.pic, self.url)

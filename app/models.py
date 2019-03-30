@@ -33,4 +33,14 @@ class Favorite(db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-    
+
+
+class Popular(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    genre = db.Column(db.String, nullable=True)
+    pic = db.Column(db.String, nullable=True)
+    url = db.Column(db.String)
+
+    def __repr__(self):
+        return '<New on SoundCloud {} {} {} {}'.format(self.title, self.genre, self.pic, self.url)

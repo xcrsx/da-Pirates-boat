@@ -6,10 +6,16 @@ from app.models import User
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember')
-    submit = SubmitField('Sign In')
+    username = StringField('Username', validators=[DataRequired()],
+                           render_kw={"class": "form-control",
+                           "id": "exampleInputUsername1",
+                           "placeholder": "Enter your username"})
+    password = PasswordField('Password', validators=[DataRequired()],
+                             render_kw={"class": "form-control",
+                             "id": "exampleInputPassword1",
+                             "placeholder": "Enter password"})
+    remember_me = BooleanField('Remember',)
+    submit = SubmitField('Sign In', render_kw={"class": "btn btn-primary"})
 
 
 class MusicSearchForm(FlaskForm):

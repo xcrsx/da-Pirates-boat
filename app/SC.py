@@ -1,4 +1,6 @@
 import requests
+from app.models import Popular
+from app import db
 
 
 class SoundCloudParsing():
@@ -23,3 +25,11 @@ class SoundCloudParsing():
             })
         except (KeyError):
             pass
+
+
+'''def save_popular(title, genre, pic, url):
+    playlist_exists = Popular.query.filter(Popular.url == url).count()
+    if not playlist_exists:
+        new_playlist = Popular(title=title, genre=genre, pic=pic, url=url)
+        db.session.add(new_playlist)
+        db.session.commit()'''

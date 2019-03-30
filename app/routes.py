@@ -3,16 +3,18 @@ from app.forms import RegistrationForm
 from flask import render_template, flash, redirect, url_for, request
 from app import app
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Favorite
+from app.models import User, Favorite, Popular
 from werkzeug.urls import url_parse
 from app.forms import LoginForm, MusicSearchForm, SearchResultForm
 from app.SC import SoundCloudParsing
+
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     user = current_user
     sc_list = SoundCloudParsing.sc_result
+#    popular_sc = Popular.query.limit(6).all()
     form = LoginForm()
     if not current_user.is_authenticated:
         if form.validate_on_submit():
@@ -37,6 +39,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
+        flash('Welcome back!')
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')

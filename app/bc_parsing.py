@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 def get_html(url):
     try:
         result = requests.get(url)
@@ -9,6 +10,7 @@ def get_html(url):
     except (requests.RequestException, ValueError):
         print("Connection error")
         return False
+
 
 def get_daily_music():
     html = get_html("https://daily.bandcamp.com")

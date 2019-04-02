@@ -22,7 +22,10 @@ class MusicSearchForm(FlaskForm):
     choices = [('Artist', 'Artist'),
                ('Album', 'Album')]
     select = SelectField(choices=choices)
-    search = StringField("I'm looking for...", validators=[DataRequired()])
+    search = StringField("I'm looking for...", validators=[DataRequired()],
+                         render_kw={"class": "form-control",
+                         "id": "exampleInputRequest",
+                         "placeholder": "Search for artist or song"})
     submit = SubmitField('Find it!!!')
 
 

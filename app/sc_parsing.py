@@ -7,9 +7,9 @@ from app import db
 def soundcloud_parsing():
     soundcload_main_url = Config.SC_API_MAINPAGE
     result = requests.get(soundcload_main_url)
-    value = result.json()
+    result = result.json()
     sc_result = []
-    for info in value['collection']:
+    for info in result['collection']:
         try:
             if info['genre'] == "":
                 sc_genre = 'Other'

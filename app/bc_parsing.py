@@ -1,7 +1,6 @@
 import requests
 from config import Config
 
-
 def bandcamp_parsing():
     bandcamp_url = Config.BC_API
     bc_result = []    

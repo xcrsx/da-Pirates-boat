@@ -7,7 +7,7 @@ from app.models import User, Favorite, Popular
 from werkzeug.urls import url_parse
 from app.forms import LoginForm, MusicSearchForm, SearchResultForm
 from app.sc_parsing import soundcloud_parsing
-from app.bc_parsing import bandcamp_parsing
+from app.search_in_sc import search_sc
 
 
 @app.route('/')
@@ -57,19 +57,15 @@ def search():
     if form.validate_on_submit():
         flash('Search requested for author: {}'.format(
            form.search.data))
-        return redirect('/search_result')
+        return redirect(url_for('search_result'))
     return render_template('search.html', title="Let's find smth", form=form)
 
 
 @app.route('/search_result', methods=['GET', 'POST'])
 def search_result():
-    form = SearchResultForm()
-    if form.validate_on_submit():
-        flash('New search requested: {}'.format(
-           form.search.data))
-        return redirect('/search_result')
-    return render_template('search_result.html', title="Let's find smth", 
-                           form=form)
+    list_of_songs = search_sc()
+    return render_template('search_result.html', title="what do we have here",
+                           list_of_songs=list_of_songs)
 
 
 @app.route('/user/<username>')

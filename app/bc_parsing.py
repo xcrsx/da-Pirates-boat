@@ -1,5 +1,6 @@
 import requests
 from config import Config
+from app.models import Bandcamp 
 
 def bandcamp_parsing():
     bandcamp_url = Config.BC_API
@@ -27,7 +28,17 @@ def bandcamp_parsing():
                 })
         except (KeyError, ValueError):
             'Ошибка при подключении к Bandcamp'   
-    return bc_result
+    save_result(genre_text, art_id, primary_text, secondary_text, title, file, publish_date)
 
 
-
+def save_result(genre_text, art_id, primary_text, secondary_text, title, file, publish_date):
+    playlist_exists = Bandcamp.query.filter(Bandcamp.file == file).count()
+    if not playlist_exists:
+        new_playlist = Bandcamp(genre_text=genre_text, 
+                            art_id=art_id, 
+                            primary_text=primary_text, 
+                            secondary_text=secondary_text,
+                            file=file,                           
+                            timestamp=publish_date)
+        db.session.add(new_playlist)
+        db.session.commit()

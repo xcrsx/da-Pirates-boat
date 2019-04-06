@@ -46,3 +46,17 @@ class Popular(db.Model):
 
     def __repr__(self):
         return '<New on SoundCloud {} {} {} {}'.format(self.title, self.genre, self.pic, self.url)
+
+class Bandcamp(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    genre_text = db.Column(db.String, nullable=True)
+    art_id = db.Column(db.String, nullable=True)
+    file = db.Column(db.String)
+    primary_text = db.Column(db.String)
+    secondary_text = db.Column(db.String)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<New on Bandcamp {} {} {} {} {} {}'.format(self.title, self.genre_text, self.art_id, self.file, self.primary_text, self.secondary_text)
+

@@ -3,7 +3,7 @@ from app.forms import RegistrationForm
 from flask import render_template, flash, redirect, url_for, request
 from app import app
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Favorite, Popular
+from app.models import User, Favorite, Popular, Bandcamp
 from werkzeug.urls import url_parse
 from app.forms import LoginForm, MusicSearchForm, SearchResultForm
 from app.sc_parsing import soundcloud_parsing
@@ -18,6 +18,7 @@ def index():
 
 #    sc_list = SoundCloudParsing.sc_result
     popular_sc = Popular.query.order_by(Popular.timestamp.desc()).limit(6).all()
+    bandcamp = Bandcamp.query.order_by(Bandcamp.timestamp.desc()).limit(8).all()
 
     form = LoginForm()
     if not current_user.is_authenticated:
@@ -29,7 +30,7 @@ def index():
             login_user(user, remember=form.remember_me.data)
             return redirect(url_for('index'))
     return render_template('index.html', title='Wharf', form=form,
-                           popular_sc=popular_sc)
+                           popular_sc=popular_sc, bandcamp=bandcamp)
 
 
 @app.route('/login', methods=['GET', 'POST'])

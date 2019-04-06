@@ -16,12 +16,12 @@
             {% endif %}
             <hr/>                
                 <div class="row justify-content-md-center">
-                        <div class="col-5">
+                        <!-- <div class="col-5">
                             <h3>Daily in Bandcamp:</h3><hr/>
                                 {% for music in bc_list %}
                                     <iframe allowtransparency="{{ music.allowtransparency }}" frameborder="{{ music.frameborder }}" height="{{ music.height }}}" src="{{ music.src }}" style="{{ music.style }}" width="{{ music.width }}"></iframe><hr/> 
                                 {% endfor %}
-                        </div>
+                        </div> -->
                         <div class="col-5">
                             <h3>New in SoundCloud:</h3><hr/>
                                 {% for info in popular_sc %}
@@ -52,11 +52,16 @@
 
                                             }());
                                         </script>
-                                        <!--<h5>{{ info.title }}</h5>
-                                        <h5><a href="{{ url_for('player') }}"><img src="{{ (info.artwork) }}"> </span></a></h5>-->
+
                                         <hr/>
                                         {% endfor %}
+                            <h3>New in SoundCloud:</h3><hr/>
+                                {% for info in bandcamp %}
+                                <h4>{{ info.genre_text }}</h4>
+                                <h4>Name: {{ info.title }}</h4>
+                                {% endfor %}
                             </div>
+
                         <div class="col">   
                         {% if current_user.is_anonymous %}
                             <h2>Sign In</h2><hr/>

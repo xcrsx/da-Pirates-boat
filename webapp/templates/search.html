@@ -13,7 +13,7 @@
             {% endwith %}
 <div class="container">
     <h1>Let's find what are you looking for!</h1>
-        <form action="{{ url_for('search_result') }}" method="POST">
+        <form action="{{ url_for('search.search_result') }}" method="POST">
             {{ form.hidden_tag() }}
             <p>
                 {{ form.search.label }}<br>

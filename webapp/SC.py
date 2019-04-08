@@ -1,6 +1,5 @@
 import requests
-from app.models import Popular
-from app import db
+from webapp.models import Popular, db
 
 
 class SoundCloudParsing():

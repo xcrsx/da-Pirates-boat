@@ -1,5 +1,5 @@
 import requests
-from app.forms import MusicSearchForm
+from webapp.search.forms import MusicSearchForm
 
 
 def search_sc():

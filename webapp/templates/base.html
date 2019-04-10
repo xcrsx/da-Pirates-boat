@@ -15,7 +15,13 @@
             <h5 class="my-0 mr-md-auto font-weight-normal">
                     <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                              <li class="breadcrumb-item"><a href="{{ url_for('index') }}">da Boat</a></li>
+                                    <nav class="navbar navbar-light bg-light">
+                                            <a class="navbar-brand" href="#">
+                                              <img src="https://pp.userapi.com/c851536/v851536660/f28b1/AVYLGhEDhKA.jpg" width="30" height="30" alt="">
+                                              <li class="breadcrumb-item"><a href="{{ url_for('index') }}">da Boat</a></li>
+                                            </a>
+                                    </nav>
+                              
                              
                             </ol>
                     </nav>
@@ -25,16 +31,16 @@
                         <li class="breadcrumb-item">
                             <a class="p-2 text-dark" href="{{ url_for('index') }}">Wharf</a>
                             {% if current_user.is_anonymous %}
-                            <a class="p-2 text-dark" href="{{ url_for('login') }}">Sign up</a>
+                            <a class="p-2 text-dark" href="{{ url_for('user.login') }}">Sign up</a>
                             {% else %}
-                            <a class="p-2 text-dark" href="{{ url_for('logout') }}">Logout</a>
+                            <a class="p-2 text-dark" href="{{ url_for('user.logout') }}">Logout</a>
                             {% endif %}
                             {% if not current_user.is_anonymous %}
-                            <a class="p-2 text-dark" href="{{ url_for('user', username=current_user.username) }}">My profile</a>
+                            <a class="p-2 text-dark" href="{{ url_for('user.user', username=current_user.username) }}">My profile</a>
                             {% else %}
-                            <a class="p-2 text-dark" href="{{ url_for('login') }}">My profile</a>
+                            <a class="p-2 text-dark" href="{{ url_for('user.login') }}">My profile</a>
                             {% endif %}
-                            <a class="p-2 text-dark" href="{{ url_for('search') }}">Search</a>
+                            <a class="p-2 text-dark" href="{{ url_for('search.search') }}">Search</a>
                         </li>        
                     </ol>
             </nav>

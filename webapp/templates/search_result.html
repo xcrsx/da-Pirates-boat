@@ -3,9 +3,9 @@
 {% block content %}
 <div class="container">
     <h2>Didn't find what you were looking for? 
-        Let's try again! <a href="{{ url_for('search') }}">Go back!</a></h2>
+        Let's try again! <a href="{{ url_for('search.search') }}">Go back!</a></h2>
     <h2>Searching results:</h2>
-    <div class="row">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <div class="col-4">
                 {% for song in list_of_songs %}
                     <iframe id="sc-widget" src="https://w.soundcloud.com/player/?url={{ song.song }}" width="100%" height="100" scrolling="no" frameborder="no"></iframe>
@@ -34,7 +34,8 @@
                             }());
                         </script>                        
                 {% endfor %}
-            </div>
+        </div>
+    </div>
             {% with messages = get_flashed_messages() %}
             {% if messages %}            
             <hr>

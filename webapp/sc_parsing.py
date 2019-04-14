@@ -26,7 +26,7 @@ def soundcloud_parsing():
                 'genre': sc_genre,
                 'title': sc_title,
                 'artwork': sc_artwork_url,
-                'playlist': sc_permalink_url, # ссылка на плейлист, если он нужен. Если не нужен-можно убрать
+                'playlist': sc_permalink_url, # ссылка на плейлист, если он нужен.
                 'uri': sc_uri
             })
         except (KeyError, ValueError):

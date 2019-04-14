@@ -2,11 +2,13 @@ from webapp import db
 from flask import render_template, flash, redirect, url_for
 from webapp import app, login
 from flask_login import current_user, login_user, login_required
-from webapp.models import Favorite, Popular
+from webapp.models import Favorite, Popular, Bandcamp
 from webapp.user.models import User
 from webapp.user.forms import LoginForm, RegistrationForm
 from webapp.sc_parsing import soundcloud_parsing
-from webapp.bc_parsing import get_daily_music
+from webapp.bc_parsing import bandcamp_parsing
+
+
 
 
 @app.route('/')
@@ -15,8 +17,8 @@ def index():
     user = current_user
     soundcloud_parsing()
 #    sc_list = SoundCloudParsing.sc_result
-    popular_sc = Popular.query.limit(6).all()
-    bc_list = get_daily_music()
+    popular_sc = Popular.query.limit(10).all()
+    popular_bc = Bandcamp.query.limit(10).all()
     form = LoginForm()
     if not current_user.is_authenticated:
         if form.validate_on_submit():
@@ -27,7 +29,7 @@ def index():
             login_user(user, remember=form.remember_me.data)
             return redirect(url_for('index'))
     return render_template('index.html', title='Wharf', form=form,
-                           popular_sc=popular_sc, bc_list=bc_list)
+                           popular_sc=popular_sc, popular_bc=popular_bc)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -67,3 +69,4 @@ def remove_song(song):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+

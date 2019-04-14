@@ -53,14 +53,14 @@
                                             }());
                                         </script>
                                         <hr/>
-                                        {% endfor %}
-                            <h3>New in SoundCloud:</h3><hr/>
-                                {% for info in bandcamp %}
+                                        {% endfor %}    
+                                        
+                            <h3>New in Bandcamp:</h3><hr/>
+                                {% for info in popular_bc %}
                                 <h4>{{ info.genre_text }}</h4>
-                                <h4>Name: {{ info.title }}</h4>
-                                {% endfor %}
+                                <h4>Name: {{ info.title }}</h4>    
+                                {% endfor %}     
                             </div>
-
                         <div class="col">   
                         {% if current_user.is_anonymous %}
                             <h2>Sign In</h2><hr/>

@@ -4,6 +4,39 @@
 <div class='container'>
             <h2>Hello, {{ current_user.username }}!</h2>
             <hr>
-            <h2>Here is your favorite artists: {{ artists }}</h2>
+            <h2>Here is your favorite songs:
+                    {% for song in songs %}
+                    <iframe id="sc-widget" src="https://w.soundcloud.com/player/?url={{ song.song }}" width="100%" height="100" scrolling="no" frameborder="no"></iframe>
+                    <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+                        <script type="text/javascript">
+                            (function(){
+                                var widgetIframe = document.getElementById('sc-widget'),
+                            widget       = SC.Widget(widgetIframe);
+
+                            widget.bind(SC.Widget.Events.READY, function() {
+                            widget.bind(SC.Widget.Events.PLAY, function() {
+                            // get information about currently playing sound
+                            widget.getCurrentSound(function(currentSound) {
+                            console.log('sound ' + currentSound.get('') + 'began to play');
+                                });
+                            });
+                            // get current level of volume
+                            widget.getVolume(function(volume) {
+                            console.log('current volume value is ' + volume);
+                            });
+                            // set new volume level
+                            widget.setVolume(50);
+                            // get the value of the current position
+                            });
+
+                            }());
+                        </script>
+                        <form action="/remove_song" method="POST">
+                            <!--hidden parametr-->
+                            <input type="hidden" name="song" value="{{ song.song }}">
+                            <input type="submit" class="btn btn-primary" value="Remove from favorite">
+                        </form>
+                {% endfor %}
+            </h2>
 </div>
 {% endblock %}

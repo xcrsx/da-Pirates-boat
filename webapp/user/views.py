@@ -12,7 +12,7 @@ blueprint = Blueprint('user', __name__, url_prefix='/users')
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('user'))
+        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -32,8 +32,9 @@ def login():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first()
-    artists = Favorite.query.filter_by(user_id=user.id).all()
-    return render_template('profile.html', title='My profile', user=user)
+    songs = Favorite.query.filter_by(user_id=user.id).all()
+    return render_template('profile.html', title='My profile', user=user,
+                           songs=songs)
 
 
 @blueprint.route('/logout')

@@ -52,6 +52,11 @@
 
                                             }());
                                         </script>
+                                        <form action="/add_song" method="POST">
+                                            <!--hidden parametr-->
+                                            <input type="hidden" name="song" value="{{ info.url }}">
+                                            <input type="submit" class="btn btn-primary" value="Add to favorite">
+                                        </form>
                                         <hr/>
                                         {% endfor %}
                             </div>

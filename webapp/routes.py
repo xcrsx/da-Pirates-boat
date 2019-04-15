@@ -1,5 +1,5 @@
 from webapp import db
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from webapp import app, login
 from flask_login import current_user, login_user, login_required
 from webapp.models import Favorite, Popular
@@ -45,23 +45,27 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route('/add_song', methods=['GET', 'POST'])
+@app.route('/add_song', methods=['POST'])
 @login_required
-def add_song(song):
-    title = Favorite.query.filter_by(song=song).first()
-    current_user.add_to_favorite(title)
+def add_song():
+    song = request.form['song']
+    user = current_user
+    new_song = Favorite(song=song, user_id=user.id)
+    db.session.add(new_song)
     db.session.commit()
     flash('You are have added the song to you favorite')
-    return redirect(url_for('user'))
+    return redirect(url_for('index'))
 
 
-@app.route('/remove_song', methods=['GET', 'POST'])
-def remove_song(song):
-    title = Favorite.query.filter_by(song=song).first()
-    current_user.remove_from_favorite(title)
+@app.route('/remove_song', methods=['POST'])
+def remove_song():
+    song = request.form['song']
+    user = current_user
+    title = Favorite.query.filter_by(song=song, user_id=user.id).first()
+    db.session.delete(title)
     db.session.commit()
     flash('You are have removed the song from you favorite')
-    return redirect(url_for('user'))
+    return redirect(url_for('index'))
 
 
 @login.user_loader

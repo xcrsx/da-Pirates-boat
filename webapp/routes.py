@@ -16,8 +16,9 @@ from webapp.bc_parsing import bandcamp_parsing
 def index():
     user = current_user
     soundcloud_parsing()
+    bandcamp_parsing()
 #    sc_list = SoundCloudParsing.sc_result
-    popular_sc = Popular.query.limit(10).all()
+    popular_sc = Popular.query.limit(8).all()
     popular_bc = Bandcamp.query.limit(10).all()
     form = LoginForm()
     if not current_user.is_authenticated:

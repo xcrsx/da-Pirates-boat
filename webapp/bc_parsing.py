@@ -26,10 +26,11 @@ def bandcamp_parsing():
                     'title': title,
                     'file': file,
                 })
-            return bc_result
-        except (KeyError, ValueError):
+                save_result(genre_text, art_id, primary_text, secondary_text, title, file)                
+        except (KeyError, ValueError, ConnectionError):
             'Ошибка при подключении к Bandcamp'   
-    save_result(genre_text, art_id, primary_text, secondary_text, title, file)
+            
+            
 
 
 def save_result(genre_text, art_id, primary_text, secondary_text, title, file):

@@ -31,7 +31,7 @@ def soundcloud_parsing():
             })
         except (KeyError, ValueError):
             'Ошибка при подключении к главной странице SoundCloud'
-    save_result(sc_genre, sc_title, sc_artwork_url, sc_uri)
+        save_result(sc_genre, sc_title, sc_artwork_url, sc_uri)
 
 
 def save_result(genre, title, artwork, uri):

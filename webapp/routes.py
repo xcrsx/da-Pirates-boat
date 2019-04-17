@@ -19,7 +19,7 @@ def index():
     bandcamp_parsing()
 #    sc_list = SoundCloudParsing.sc_result
     popular_sc = Popular.query.limit(8).all()
-    popular_bc = Bandcamp.query.limit(10).all()
+    popular_bc = Bandcamp.query.limit(20).all()
     form = LoginForm()
     if not current_user.is_authenticated:
         if form.validate_on_submit():

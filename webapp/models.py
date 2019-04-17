@@ -32,12 +32,12 @@ class Popular(db.Model):
 
 class Bandcamp(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    genre_text = db.Column(db.String, nullable=True)
-    art_id = db.Column(db.String, nullable=True)
-    primary_text = db.Column(db.String)
-    secondary_text = db.Column(db.String)
+    genre = db.Column(db.String, nullable=True)
+    art = db.Column(db.String, nullable=True)
+    album = db.Column(db.String)
+    autor = db.Column(db.String)
     title = db.Column(db.String)
-    file = db.Column(db.String) 
+    url = db.Column(db.String) 
 
     def __repr__(self):
         return '<New on Bandcamp {} {} {} {} {} {}'.format(self.genre_text, 

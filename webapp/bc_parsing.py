@@ -10,7 +10,7 @@ def bandcamp_parsing():
         try:
             result = requests.get(url)
             result = result.json()                  
-            for info in result['items'][:8]:
+            for info in result['items'][:4]:
                 genre_text = info['genre_text'] #genre
                 art_id = info['art_id'] #art number (для получения картинки в дальнейшем)
                 primary_text = info['primary_text'] #album name
@@ -34,13 +34,13 @@ def bandcamp_parsing():
 
 
 def save_result(genre_text, art_id, primary_text, secondary_text, title, file):
-    playlist_exists = Bandcamp.query.filter(Bandcamp.file == file).count()
+    playlist_exists = Bandcamp.query.filter(Bandcamp.art == art_id).count()
     if not playlist_exists:
-        new_playlist = Bandcamp(genre_text=genre_text, 
-                            art_id=art_id, 
-                            primary_text=primary_text, 
-                            secondary_text=secondary_text,
+        new_playlist = Bandcamp(genre=genre_text, 
+                            art=art_id, 
+                            album=primary_text, 
+                            autor=secondary_text,
                             title=title,
-                            file=file)
+                            url=file)
         db.session.add(new_playlist)
         db.session.commit()

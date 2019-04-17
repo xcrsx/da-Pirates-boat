@@ -1,6 +1,7 @@
 from webapp.models import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from webapp.models import Favorite
 
 
 class User(UserMixin, db.Model):
@@ -8,9 +9,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    # favorite = db.relationship(favorite_songs,
-    #                            primaryjoin=(favorite_songs.c.favorite_id == id),
-    #                            backref=db.backref('favorite_songs', lazy='dynamic'), lazy='dynamic')
+    favorite = db.relationship('Favorite', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)

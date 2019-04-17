@@ -4,19 +4,13 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
-favorite_songs = db.Table('favorite_song',
-                          db.Column('favorite_id', db.Integer,
-                                    db.ForeignKey('user.id')),
-                          db.Column('url', db.String, unique=True))
-
-
 class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     song = db.Column(db.String, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<Favorite {}>'.format(self.artist)
+        return self.song
 
 
 class Popular(db.Model):

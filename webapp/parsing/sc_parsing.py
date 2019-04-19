@@ -1,7 +1,7 @@
 import requests
 from config import Config
-from webapp.models import Popular
-from webapp.models import db
+from webapp.parsing.models import SoundCloud
+from webapp.db import db
 
 
 def soundcloud_parsing():
@@ -35,8 +35,8 @@ def soundcloud_parsing():
 
 
 def save_result(genre, title, artwork, uri):
-    playlist_exists = Popular.query.filter(Popular.url == uri).count()
+    playlist_exists = SoundCloud.query.filter(SoundCloud.url == uri).count()
     if not playlist_exists:
-        new_playlist = Popular(title=title, genre=genre, pic=artwork, url=uri)
+        new_playlist = SoundCloud(title=title, genre=genre, pic=artwork, url=uri)
         db.session.add(new_playlist)
         db.session.commit()

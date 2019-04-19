@@ -1,7 +1,16 @@
-from webapp.models import db
+from webapp.db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from webapp.models import Favorite
+
+
+
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    song = db.Column(db.String, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return self.song
 
 
 class User(UserMixin, db.Model):

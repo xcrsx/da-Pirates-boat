@@ -10,7 +10,7 @@
                       }
             </style>-->
             {% if current_user.is_anonymous %}
-            <h2>Hello, <a href="{{ url_for('register') }}">user!</a></h2>
+            <h2>Hello, <a href="{{ url_for('user.register') }}">user!</a></h2>
             {% else %}
             <h2>Hello, {{ current_user.username }}!</h2>
             {% endif %}
@@ -81,7 +81,7 @@
                                 </div>
                                 <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
                                 <p>{{ form.submit() }}</p>
-                                <p> New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+                                <p> New User? <a href="{{ url_for('user.register') }}">Click to Register!</a></p>
                             </form>        
                         {% endif %}
                         </div> 

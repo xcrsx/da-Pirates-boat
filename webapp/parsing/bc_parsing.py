@@ -1,7 +1,8 @@
 import requests
 from config import Config
-from webapp.models import Bandcamp
-from webapp.models import db
+from webapp.parsing.models import Bandcamp
+from webapp.db import db
+
 
 def bandcamp_parsing():
     bandcamp_url = Config.BC_API
@@ -28,9 +29,7 @@ def bandcamp_parsing():
                 })
                 save_result(genre_text, art_id, primary_text, secondary_text, title, file)                
         except (KeyError, ValueError, ConnectionError):
-            'Ошибка при подключении к Bandcamp'   
-            
-            
+            'Ошибка при подключении к Bandcamp'            
 
 
 def save_result(genre_text, art_id, primary_text, secondary_text, title, file):

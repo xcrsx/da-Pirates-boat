@@ -1,15 +1,15 @@
 import requests
 from config import Config
-from webapp.models import Popular
-from webapp.models import db
+from webapp.parsing.models import SoundCloud
+from webapp.db import db
 
 
 def soundcloud_parsing():
     soundcload_main_url = Config.SC_API_MAINPAGE
     result = requests.get(soundcload_main_url)
-    value = result.json()
+    result = result.json()
     sc_result = []
-    for info in value['collection']:
+    for info in result['collection']:
         try:
             if info['genre'] == "":
                 sc_genre = 'Other'
@@ -26,7 +26,7 @@ def soundcloud_parsing():
                 'genre': sc_genre,
                 'title': sc_title,
                 'artwork': sc_artwork_url,
-                'playlist': sc_permalink_url, # ссылка на плейлист, если он нужен. Если не нужен-можно убрать
+                'playlist': sc_permalink_url, # ссылка на плейлист, если он нужен.
                 'uri': sc_uri
             })
         except (KeyError, ValueError):
@@ -35,8 +35,8 @@ def soundcloud_parsing():
 
 
 def save_result(genre, title, artwork, uri):
-    playlist_exists = Popular.query.filter(Popular.url == uri).count()
+    playlist_exists = SoundCloud.query.filter(SoundCloud.url == uri).count()
     if not playlist_exists:
-        new_playlist = Popular(title=title, genre=genre, pic=artwork, url=uri)
+        new_playlist = SoundCloud(title=title, genre=genre, pic=artwork, url=uri)
         db.session.add(new_playlist)
         db.session.commit()

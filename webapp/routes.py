@@ -50,7 +50,9 @@ def register():
 def add_song():
     song = request.form['song']
     user = current_user
-    new_song = Favorite(song=song, user_id=user.id)
+    song_in_db = Favorite.query.filter_by(song=song, user_id=user.id).first()
+    if not song_in_db:
+        new_song = Favorite(song=song, user_id=user.id)
     db.session.add(new_song)
     db.session.commit()
     flash('You are have added the song to you favorite')

@@ -52,13 +52,19 @@
 
                                             }());
                                         </script>
-                                        <form action="/add_song" method="POST">
-                                            <!--hidden parametr-->
-                                            <input type="hidden" name="song" value="{{ info.url }}">
-                                            <input type="submit" class="btn btn-primary" value="Add to favorite">
-                                        </form>
+                                        
+                                        <button class="btn btn-dark">Add to favorite</button>
                                         <hr/>
                                         {% endfor %}
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                        <script>
+                                            $(document).ready(function(){
+                                                $('button').click(function(){
+                                                    $.post("/add_song",
+                                                    {song: "{{ popular_sc['song'] }}"});
+                                                });
+                                            });
+                                        </script>
                             </div>
                         <div class="col">   
                         {% if current_user.is_anonymous %}

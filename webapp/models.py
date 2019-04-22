@@ -6,8 +6,11 @@ db = SQLAlchemy()
 
 class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    song = db.Column(db.String, nullable=True)
+    song = db.Column(db.String, nullable=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def is_favorite(self, song):
+        return self.filter(Favorite.song == song).count() > 0
 
     def __repr__(self):
         return self.song

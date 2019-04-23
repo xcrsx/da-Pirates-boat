@@ -49,3 +49,8 @@ def remove_song():
 def load_user(id):
     return User.query.get(int(id))
 
+
+@app.route('/player', methods=['GET', 'POST'])
+def player():
+    return render_template('player/player.html')
+

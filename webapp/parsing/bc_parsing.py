@@ -2,6 +2,7 @@ import requests
 from config import Config
 from webapp.parsing.models import Bandcamp
 from webapp.db import db
+from datetime import datetime
 
 
 def bandcamp_parsing():
@@ -18,7 +19,7 @@ def bandcamp_parsing():
                 secondary_text = info['secondary_text'] #autor name
                 title = info['featured_track']['title'] #song name
                 file = info['featured_track']['file']['mp3-128'] #song    
-                #publish_date = info['publish_date']            
+                date_entry = datetime.now()          
                 bc_result.append({
                     'genre_text': genre_text,
                     'art_id': art_id,
@@ -27,12 +28,12 @@ def bandcamp_parsing():
                     'title': title,
                     'file': file,
                 })
-                save_result(genre_text, art_id, primary_text, secondary_text, title, file)                
+                save_result(genre_text, art_id, primary_text, secondary_text, title, file, date_entry)                
         except (KeyError, ValueError, ConnectionError):
             'Ошибка при подключении к Bandcamp'            
 
 
-def save_result(genre_text, art_id, primary_text, secondary_text, title, file):
+def save_result(genre_text, art_id, primary_text, secondary_text, title, file, date_entry):
     playlist_exists = Bandcamp.query.filter(Bandcamp.art == art_id).count()
     if not playlist_exists:
         new_playlist = Bandcamp(genre=genre_text, 
@@ -40,6 +41,7 @@ def save_result(genre_text, art_id, primary_text, secondary_text, title, file):
                             album=primary_text, 
                             autor=secondary_text,
                             title=title,
-                            url=file)
+                            url=file,
+                            date_entry=date_entry)
         db.session.add(new_playlist)
         db.session.commit()

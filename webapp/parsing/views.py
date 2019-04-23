@@ -13,6 +13,6 @@ def parsing():
     form=LoginForm()
     bandcamp_parsing()
     soundcloud_parsing()
-    popular_sc = SoundCloud.query.limit(8).all()
-    popular_bc = Bandcamp.query.limit(20).all()
+    popular_sc = SoundCloud.query.order_by(SoundCloud.date_entry.desc()).limit(8).all()
+    popular_bc = Bandcamp.query.order_by(Bandcamp.date_entry.desc()).limit(20).all()
     return render_template('index.html', popular_sc=popular_sc, popular_bc=popular_bc, form=form)

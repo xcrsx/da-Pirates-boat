@@ -1,16 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% with messages = get_flashed_messages() %}
-            {% if messages %}            
-            <hr>
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
 <div class="container">
     <h1>Let's find what are you looking for!</h1>
         <form action="{{ url_for('search.search_result') }}" method="POST">

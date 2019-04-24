@@ -16,18 +16,7 @@
                                 {% for music in bc_list %}
                                     <iframe allowtransparency="{{ music.allowtransparency }}" frameborder="{{ music.frameborder }}" height="{{ music.height }}}" src="{{ music.src }}" style="{{ music.style }}" width="{{ music.width }}"></iframe><hr/> 
                                 {% endfor %}
-                        </div> -->
-                        <div class="col">                                                                    
-                            <h3>New in Bandcamp:</h3><hr/>
-                                {% for info in popular_bc %}
-                                <h4>{{ info.genre }}</h4>
-                                <img style="-webkit-user-select: none;" src="https://f4.bcbits.com/img/a{{ info.art }}_8.jpg"> 
-                                <h4>{{ info.title }}</h4>
-                                <audio controls>
-                                    <source src="{{ info.url }}" type="audio/mpeg">
-                                </audio>    
-                                {% endfor %}  
-                        </div>                 
+                        </div> -->                        
                         <div class="col-5">
                             <h3>New in SoundCloud:</h3><hr/>
                                 {% for info in popular_sc %}

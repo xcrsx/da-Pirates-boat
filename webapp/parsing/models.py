@@ -14,7 +14,7 @@ class SoundCloud(db.Model):
                                                     self.genre,
                                                     self.pic,
                                                     self.url,
-                                                    date_entry)
+                                                    self.date_entry)
 
 
 class Bandcamp(db.Model):

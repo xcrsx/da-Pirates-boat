@@ -21,7 +21,7 @@
                                     <nav class="navbar navbar-light bg-light">
                                             <a class="navbar-brand" href="#">
                                               <img src="https://pp.userapi.com/c851536/v851536660/f28b1/AVYLGhEDhKA.jpg" width="30" height="30" alt="">
-                                              <li class="breadcrumb-item"><a href="{{ url_for('user.index') }}">da Boat</a></li>
+                                              <li class="breadcrumb-item"><a href="{{ url_for('index') }}">da Boat</a></li>
                                             </a>
                                     </nav>
                               
@@ -32,7 +32,7 @@
             <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a class="p-2 text-dark" href="{{ url_for('user.index') }}">Wharf</a>
+                            <a class="p-2 text-dark" href="{{ url_for('index') }}">Wharf</a>
                             {% if current_user.is_anonymous %}
                             <a class="p-2 text-dark" href="{{ url_for('user.login') }}">Sign up</a>
                             {% else %}

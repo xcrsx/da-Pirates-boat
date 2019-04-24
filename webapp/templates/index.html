@@ -4,11 +4,6 @@
 <div class='d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm'>
     <div class="row">
         <div class="col-md-12">
-            <!--<style>
-                body {background: url(https://www.carbonbrief.org/wp-content/uploads/2015/02/stock-deep-ocean-1550x804.jpg);
-                      color: wheat;
-                      }
-            </style>-->
             {% if current_user.is_anonymous %}
             <h2>Hello, <a href="{{ url_for('user.register') }}">user!</a></h2>
             {% else %}
@@ -22,9 +17,21 @@
                                     <iframe allowtransparency="{{ music.allowtransparency }}" frameborder="{{ music.frameborder }}" height="{{ music.height }}}" src="{{ music.src }}" style="{{ music.style }}" width="{{ music.width }}"></iframe><hr/> 
                                 {% endfor %}
                         </div> -->
+                        <div class="col">                                                                    
+                            <h3>New in Bandcamp:</h3><hr/>
+                                {% for info in popular_bc %}
+                                <h4>{{ info.genre }}</h4>
+                                <img style="-webkit-user-select: none;" src="https://f4.bcbits.com/img/a{{ info.art }}_8.jpg"> 
+                                <h4>{{ info.title }}</h4>
+                                <audio controls>
+                                    <source src="{{ info.url }}" type="audio/mpeg">
+                                </audio>    
+                                {% endfor %}  
+                        </div>                 
                         <div class="col-5">
                             <h3>New in SoundCloud:</h3><hr/>
                                 {% for info in popular_sc %}
+                                <body>
                                 <h4>{{ info.genre }}</h4>
                                 <h4>Name: {{ info.title }}</h4>
                                     <iframe id="sc-widget" src="https://w.soundcloud.com/player/?url={{ info.url }}" width="100%" height="100" scrolling="no" frameborder="no"></iframe>
@@ -52,14 +59,21 @@
 
                                             }());
                                         </script>
-                                        <form action="/add_song" method="POST">
-                                            <!--hidden parametr-->
-                                            <input type="hidden" name="song" value="{{ info.url }}">
-                                            <input type="submit" class="btn btn-primary" value="Add to favorite">
-                                        </form>
+                                        
+                                        <button class="btn btn-dark">Add to favorite</button>
                                         <hr/>
-                                        {% endfor %} 
-                                        </div>                                              
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                        <script>
+                                            $(document).ready(function(){
+                                                $('button').click(function(){
+                                                    $.post("/add_song",
+                                                    {song: "{{ popular_sc['song'] }}"});
+                                                });
+                                            });
+                                        </script>
+                                        {% endfor %}
+                                </body>
+                            </div> 
                         <div class="col">   
                         {% if current_user.is_anonymous %}
                             <h2>Sign In</h2><hr/>

@@ -7,11 +7,11 @@ from datetime import datetime
 
 def bandcamp_parsing():
     bandcamp_url = Config.BC_API
-    bc_result = []    
+    bc_result = []
     for url in bandcamp_url:
         try:
             result = requests.get(url)
-            result = result.json()                  
+            result = result.json()
             for info in result['items'][:4]:
                 genre_text = info['genre_text'] #genre
                 art_id = info['art_id'] #art number (для получения картинки в дальнейшем)

@@ -13,7 +13,7 @@ blueprint = Blueprint('parsing', __name__)
 
 @blueprint.route('/')
 def parsing():
-    form=LoginForm()
+    form = LoginForm()
     bandcamp_parsing()
     soundcloud_parsing()
     popular_sc = SoundCloud.query.order_by(SoundCloud.date_entry.desc()).limit(8).all()

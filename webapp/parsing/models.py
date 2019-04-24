@@ -33,5 +33,5 @@ class Bandcamp(db.Model):
                                                             self.album, 
                                                             self.autor, 
                                                             self.title, 
-                                                            elf.url, 
+                                                            self.url, 
                                                             self.date_entry)

@@ -33,7 +33,7 @@ def bandcamp_parsing():
 
 
 def save_result(genre_text, art_id, primary_text, secondary_text, title, file):
-    playlist_exists = Bandcamp.query.filter(Bandcamp.art == art_id).count()
+    playlist_exists = Bandcamp.query.filter(Bandcamp.url == file).count()
     if not playlist_exists:
         new_playlist = Bandcamp(genre=genre_text,
                                 art=art_id,

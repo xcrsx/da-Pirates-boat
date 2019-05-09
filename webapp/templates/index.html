@@ -40,7 +40,6 @@
                                             (function(){
                                                 var widgetIframe = document.getElementById('sc-widget'),
                                             widget       = SC.Widget(widgetIframe);
-
                                             widget.bind(SC.Widget.Events.READY, function() {
                                             widget.bind(SC.Widget.Events.PLAY, function() {
                                             // get information about currently playing sound
@@ -56,21 +55,24 @@
                                             widget.setVolume(50);
                                             // get the value of the current position
                                             });
-
                                             }());
                                         </script>
-                                        
-                                        <button class="btn btn-dark">Add to favorite</button>
-                                        <hr/>
-                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
                                         <script>
                                             $(document).ready(function(){
-                                                $('button').click(function(){
-                                                    $.post("/add_song",
-                                                    {song: "{{ popular_sc['song'] }}"});
+                                                $("button").click(function(){
+                                                    //  $.ajax({
+                                                    //      url: '/users/add_song',
+                                                    //      song: '{{ info.url }}',
+                                                    //      type: 'POST'
+                                                    // });
+                                                     $.post("/users/add_song",
+                                                     {song: "{{ info.url }}"});
                                                 });
                                             });
                                         </script>
+                                        <button>Add to favorite</button>
+                                        <hr/>
                                         {% endfor %}
                                 </body>
                             </div> 

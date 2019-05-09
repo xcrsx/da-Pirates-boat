@@ -68,13 +68,13 @@ def index():
             user = User.query.filter_by(username=form.username.data).first()
             if user is None or not user.check_password(form.password.data):
                 flash('Invalid username or password')
-                return redirect(url_for('user/user.login'))
+                return redirect(url_for('user.login'))
             login_user(user, remember=form.remember_me.data)
             return redirect(url_for('user.index'))
     return render_template('index.html', title='Wharf', form=form)
 
 
-@blueprint.route('/add_song', methods=['POST'])
+@blueprint.route('/add_song', methods=['POST', 'GET'])
 @login_required
 def add_song():
     song = request.form['song']
@@ -82,8 +82,8 @@ def add_song():
     song_in_db = Favorite.query.filter_by(song=song, user_id=user.id).first()
     if not song_in_db:
         new_song = Favorite(song=song, user_id=user.id)
-    db.session.add(new_song)
-    db.session.commit()
+        db.session.add(new_song)
+        db.session.commit()
     flash('You are have added the song to you favorite')
     return redirect(url_for('user.index'))
 

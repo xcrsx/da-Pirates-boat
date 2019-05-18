@@ -5,6 +5,7 @@ __pycache__/
 .vscode
 rty.py
 config.py
+test.py
 # C extensions
 *.so
 
@@ -104,6 +105,3 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-
-config.py
-config2.py

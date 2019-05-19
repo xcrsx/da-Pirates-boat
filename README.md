@@ -6,7 +6,7 @@ ______________________________________________________________________________
 ### The requirements to start the app:
 - Install, create and connect PostgreSQL data base(follow the PostgreSQL tutorial)
 - Install all required modules from requirements.txt(Don't forget to use venv)
-- In the root directory of repo create configuration file config.py, which consists from:
+- In the root directory create configuration file config.py, which consists from:
     - *class Config
     - *in the class you must add all configurations and settings of your data base and SQLAlchemy
     - *SC_API_MAINPAGE -- the url to json the main page of SoundCloud

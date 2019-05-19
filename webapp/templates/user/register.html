@@ -3,7 +3,7 @@
 {% block content %}
     <body class="text-center">
         <div class="container">
-                <h1>Register</h1>
+            <h1>Register</h1>
                 <form action="" method="post" novalidate>
                     {{ form.hidden_tag() }}
                     <p>
@@ -22,21 +22,21 @@
                     </p>
                     <p>
                         {{ form.password.label }}<br>
-                        {{ form.password(sixe=32) }}
+                        {{ form.password(size=32) }}
                         {% for error in form.password.errors %}
                         <span style="color:red;">[{{ error }}]</span>
                         {% endfor %}
                     </p>
                     <p>
                         {{ form.password2.label }}<br>
-                        {{ form.password2(sixe=32) }}
+                        {{ form.password2(size=32) }}
                         {% for error in form.password2.errors %}
                         <span style="color:red;">[{{ error }}]</span>
                         {% endfor %}
                     </p>
                     <p>{{ form.submit() }}</p>
+                    <p> Already have a profile? <a href="{{ url_for('user.login') }}">Get on the boat!</a></p>
                 </form>
-            </form>
         </div>
     </body>
 {% endblock %}

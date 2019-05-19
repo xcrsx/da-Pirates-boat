@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}            
+            <hr>
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
 <body class="text-center">
     <div class="container">
             <h1>Sign In</h1>
@@ -22,7 +32,7 @@
                 </p>
                 <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
                 <p>{{ form.submit() }}</p>
-                <p> New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+                <p> New User? <a href="{{ url_for('user.register') }}">Click to Register!</a></p>
             </form>
         </form>
     </div>

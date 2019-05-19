@@ -1,5 +1,6 @@
-from app import app, db
-from app.models import User, Favorite
+from webapp import app
+from webapp.models import Favorite, db
+from webapp.user.models import User
 
 
 @app.shell_context_processor

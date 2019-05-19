@@ -9,7 +9,8 @@ class SoundCloud(db.Model):
     url = db.Column(db.String)    
 
     def __repr__(self):
-        return '<New on SoundCloud {} {} {} {}'.format(self.title, self.genre, self.pic, self.url)
+        return '<New on SoundCloud {} {} {} {}'.format(self.title, self.genre,
+                                                       self.pic, self.url)
 
 
 class Bandcamp(db.Model):
@@ -19,10 +20,12 @@ class Bandcamp(db.Model):
     album = db.Column(db.String)
     autor = db.Column(db.String)
     title = db.Column(db.String)
-    url = db.Column(db.String) 
+    url = db.Column(db.String)
 
     def __repr__(self):
-        return '<New on Bandcamp {} {} {} {} {} {}'.format(self.genre_text, 
-                                                            self.art_id, self.primary_text, 
-                                                            self.secondary_text, 
-                                                            self.title, self.file)
+        return '<New on Bandcamp {} {} {} {} {} {}'.format(self.genre_text,
+                                                           self.art_id,
+                                                           self.primary_text,
+                                                           self.secondary_text,
+                                                           self.title,
+                                                           self.file)

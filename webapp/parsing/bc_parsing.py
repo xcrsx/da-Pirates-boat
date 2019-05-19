@@ -6,11 +6,11 @@ from webapp.db import db
 
 def bandcamp_parsing():
     bandcamp_url = Config.BC_API
-    bc_result = []    
+    bc_result = []
     for url in bandcamp_url:
         try:
             result = requests.get(url)
-            result = result.json()                  
+            result = result.json()
             for info in result['items'][:4]:
                 genre_text = info['genre_text'] #genre
                 art_id = info['art_id'] #art number (для получения картинки в дальнейшем)
@@ -33,13 +33,13 @@ def bandcamp_parsing():
 
 
 def save_result(genre_text, art_id, primary_text, secondary_text, title, file):
-    playlist_exists = Bandcamp.query.filter(Bandcamp.art == art_id).count()
+    playlist_exists = Bandcamp.query.filter(Bandcamp.url == file).count()
     if not playlist_exists:
-        new_playlist = Bandcamp(genre=genre_text, 
-                            art=art_id, 
-                            album=primary_text, 
-                            autor=secondary_text,
-                            title=title,
-                            url=file)
+        new_playlist = Bandcamp(genre=genre_text,
+                                art=art_id,
+                                album=primary_text,
+                                autor=secondary_text,
+                                title=title,
+                                url=file)
         db.session.add(new_playlist)
         db.session.commit()

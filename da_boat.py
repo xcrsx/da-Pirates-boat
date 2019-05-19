@@ -1,6 +1,9 @@
-from webapp import app
-from webapp.models import Favorite, db
-from webapp.user.models import User
+from webapp import create_app
+from webapp.db import db
+from webapp.user.models import User, Favorite
+
+
+app = create_app()
 
 
 @app.shell_context_processor

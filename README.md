@@ -23,7 +23,7 @@ Windows: set FLASK_APP=webapp && set FLASK_ENV=development && set FLASK_DEBUG=1 
 ### OR you can use the file run.sh to start the app.
 
 
-## PLEASE, NOTE: The project is on the stage of under development.
+## PLEASE, NOTE: The project is under development.
 
 _____________________________________________________
 

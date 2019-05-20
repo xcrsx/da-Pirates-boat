@@ -4,15 +4,15 @@ ___________________________________________
 ![Превью](https://pp.userapi.com/c851132/v851132165/1284b1/58bhzTCdwvM.jpg)
 ______________________________________________________________________________
 ### The requirements to start the app:
-- Install, create and connect PostgreSQL data base(follow the PostgreSQL tutorial)
+- Install, create and connect PostgreSQL database(follow the PostgreSQL tutorial)
 - Install all required modules from requirements.txt(Don't forget to use venv)
-- In the root directory of project create configuration file config.py, which consists from:
+- In the root directory of the project create configuration file config.py, which consists of:
     - *class Config
-    - *in the class you must add all configurations and settings of your data base and SQLAlchemy
-    - *SC_API_MAINPAGE -- the url to json the main page of SoundCloud
-    - *BC_API -- the list of urls to json the main page of BandCamp(to various genres)
+    - *in the class you must add all configurations and settings of your database and SQLAlchemy
+    - *SC_API_MAINPAGE -- the URL to json the main page of SoundCloud
+    - *BC_API -- the list of URLs to json the main page of BandCamp(to various genres)
 
-P.S.: If you have the issues to find the urls to json, feel free to ask us! :)
+P.S.: If you have the issues to find the URLs to json, feel free to ask us! :)
 
 ### You can start the app from the terminal by using this script:
 
@@ -27,15 +27,15 @@ Windows: set FLASK_APP=webapp && set FLASK_ENV=development && set FLASK_DEBUG=1 
 
 _____________________________________________________
 
-### In the project we are going to realize the following tasks:
+### In the project we are going to  implement the following tasks:
 - [ ] Create front-end;
 - [ ] Make the opportunity for users to create their list of favorite tracks;
 - [ ] Make the opportunity for users to create their playlists;
 - [ ] Write our own audio player;
-- [ ] More new music: make the opportunity for users to add their own music and share it with another users.
+- [ ] More new music: make the opportunity for users to add their own music and share it with other users.
 
 
-### If you have any issues, please feel free to contact us by the email:
+### If you have any issues, please feel free to contact us by email:
 alexnemcev@mail.ru, xcrsx@icloud.com (or by the Telegram: @Gullkin, @xcrsx)
 
 

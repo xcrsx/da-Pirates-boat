@@ -1,19 +1,33 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, logout_user, login_required
-from webapp import login_
 from webapp.db import db
 from webapp.user.models import Favorite, User
 from werkzeug.urls import url_parse
 from webapp.user.forms import LoginForm, RegistrationForm
 
 
-blueprint = Blueprint('user', __name__, url_prefix='/users')
+blueprint = Blueprint('user', __name__)
+
+
+@blueprint.route('/', methods=['GET', 'POST'])
+def index():
+    user = current_user
+    form = LoginForm()
+    if not current_user.is_authenticated:
+        if form.validate_on_submit():
+            user = User.query.filter_by(username=form.username.data).first()
+            if user is None or not user.check_password(form.password.data):
+                flash('Invalid username or password')
+                return redirect(url_for('user.login'))
+            login_user(user, remember=form.remember_me.data)
+            return redirect(url_for('user.index'))
+    return render_template('index.html', title='Wharf', form=form)
 
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('user.index'))
+        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -47,7 +61,7 @@ def user(username):
 @blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('user.index'))
+        return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)

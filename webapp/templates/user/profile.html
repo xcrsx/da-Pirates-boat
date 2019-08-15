@@ -36,7 +36,7 @@
                           <script>
                               $(document).ready(function(){
                                   $("button").click(function(){
-                                      $.post("/users/remove_song",
+                                      $.post("/remove_song",
                                       {song: "{{ song.song }}"});
                                   });
                               });

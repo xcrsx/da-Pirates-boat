@@ -1,19 +1,28 @@
 import requests
 from webapp.db import db
 from webapp.parsing.models import Bandcamp, SoundCloud
+from config import Config
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def get_html(url):
     try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
-        }
-        result = requests.get(url, headers=headers)
+        result = requests.get(url)
         result.raise_for_status()
         return result.json()
-    except(requests.RequestException, ValueError):
-        print('Сетевая ошибка')
+    except(requests.RequestException, ValueError) as error:
+        logger.error(error)
+        print('Сетевая ошибка, смотреть логфайл')
         return False
+
+def create_url(url, data_from_form):
+    url = [f'{url}{data_from_form}']
+    data = Config.SC_DATA_SEARCH
+    for i in data:
+        url.append(f"{i}={data[i]}")
+    return "&".join(url)
 
 
 def save_bandcamp(genre, art, author, title, music_url, date_entry):

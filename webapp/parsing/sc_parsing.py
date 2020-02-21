@@ -1,8 +1,10 @@
-import requests
+import requests, logging
 from config import Config
 from datetime import datetime
 from webapp.parsing.utils import get_html, save_soundcloud
 
+
+logger = logging.getLogger(__name__)
 
 def soundcloud_parsing():
     html = get_html(Config.SC_API_MAINPAGE)
@@ -19,5 +21,6 @@ def soundcloud_parsing():
                 music_url = info['uri']
                 date_entry = datetime.now()
                 save_soundcloud(genre, art, author, title, music_url, date_entry)
-        except (KeyError ,ValueError):
-            'Ошибка при подключении к Bandcamp'
+        except (KeyError ,ValueError) as error:
+            lohher.error(error)
+            'Ошибка при подключении к Sound Cloud'

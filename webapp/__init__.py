@@ -9,6 +9,12 @@ from webapp.search.views import blueprint as search_blueprint
 from webapp.db import db
 from flask_bootstrap import Bootstrap
 
+import os, logging
+logging.basicConfig(filename=os.path.join(os.path.abspath(__name__), "logs.log"),
+                    format='[%(levelname)s]: %(asctime)s [%(module)s > %(funcName)s > %(lineno)d]: %(message)s ',
+                    datefmt='%d.%m.%Y %H:%M:%S', level=logging.INFO)
+
+logger = logging.getLogger(__name__)
 
 def create_app():
     app = Flask(__name__)
